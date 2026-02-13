@@ -53,7 +53,7 @@ resource "azurerm_network_security_group" "nsg" {
       "182.76.141.104/29",
       "115.112.142.32/29",
       "14.97.73.248/29",
-      "152.59.40.224"
+      "152.59.41.135"
     ]
     destination_address_prefix = "*"
   }
