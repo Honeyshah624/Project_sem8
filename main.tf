@@ -52,7 +52,8 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefixes = [
       "182.76.141.104/29",
       "115.112.142.32/29",
-      "14.97.73.248/29"
+      "14.97.73.248/29",
+      "152.59.40.224"
     ]
     destination_address_prefix = "*"
   }
@@ -68,7 +69,8 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefixes = [
       "182.76.141.104/29",
       "115.112.142.32/29",
-      "14.97.73.248/29"
+      "14.97.73.248/29",
+      "152.59.40.224"
     ]
     destination_address_prefix = "*"
   }
