@@ -7,7 +7,9 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 # Install Docker Compose
-sudo apt install -y docker-compose
+sudo apt update
+sudo apt install docker-compose-v2 -y
+sudo usermod -aG docker $USER
 
 ## Install Grafana
 
@@ -75,7 +77,7 @@ scrape_configs:
       - targets: ['localhost:9090']
   - job_name: 'node_exporter'
     static_configs:
-      - targets: ['localhost:9091']      
+      - targets: ['localhost:9100']      
 EOL
 
 # Create Prometheus systemd service file
@@ -126,3 +128,17 @@ EOF
 
 sudo systemctl enable node_exporter
 sudo systemctl start node_exporter
+
+## Install Docker app
+
+# Install git
+sudo apt install -y git
+
+# Clone repo
+git clone https://github.com/yaksh0210/devops-demo-app.git
+
+# Change directory
+cd devops-demo-app
+
+# Run app
+sudo docker compose up -d --build

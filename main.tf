@@ -1,3 +1,13 @@
+locals {
+  common_tags = {
+    "Resource Owner" = var.resource_owner
+    "Resource Group Owner" = var.resource_group_owner
+    Environment      = "Dev"
+    Project          = "DevOps Automation"
+  }
+}
+
+
 data "azurerm_resource_group" "rg" {
   name = var.resource_group_name
 }
@@ -10,6 +20,7 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
   location            = var.location
   resource_group_name = data.azurerm_resource_group.rg.name
+  tags                = local.common_tags
 }
 
 # -----------------------------
@@ -31,6 +42,7 @@ resource "azurerm_public_ip" "public_ip" {
   resource_group_name = data.azurerm_resource_group.rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags                = local.common_tags
 }
 
 # -----------------------------
@@ -52,8 +64,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefixes = [
       "182.76.141.104/29",
       "115.112.142.32/29",
-      "14.97.73.248/29",
-      "152.59.41.135"
+      "14.97.73.248/29"
     ]
     destination_address_prefix = "*"
   }
@@ -69,8 +80,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefixes = [
       "182.76.141.104/29",
       "115.112.142.32/29",
-      "14.97.73.248/29",
-      "152.59.40.224"
+      "14.97.73.248/29"
     ]
     destination_address_prefix = "*"
   }
@@ -106,6 +116,7 @@ resource "azurerm_network_security_group" "nsg" {
     ]
     destination_address_prefix = "*"
   }
+  tags = local.common_tags
 }
 
 # Associate NSG with Subnet
@@ -128,6 +139,7 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = var.private_ip_address_allocation
     public_ip_address_id          = azurerm_public_ip.public_ip.id
   }
+  tags = local.common_tags
 }
 
 # -----------------------------
@@ -161,4 +173,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
     sku       = "22_04-lts"
     version   = "latest"
   }
+
+  tags = local.common_tags
 }
