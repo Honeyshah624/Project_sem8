@@ -9,7 +9,7 @@ location            = "southeastasia"
 # VM Configuration
 # -----------------------------
 
-vm_name        = "devops-vm"
+vm_name        = "devops-vm-new"
 vm_size        = "Standard_B2s"
 admin_username = "azureuser"
 admin_password = "Password@1234"
@@ -18,9 +18,9 @@ admin_password = "Password@1234"
 # Networking
 # -----------------------------
 
-vnet_name                     = "vnet-demo"
-subnet_name                   = "subnet-demo"
-nic_name                      = "nic-demo"
+vnet_name                     = "vnet-demo-new"
+subnet_name                   = "subnet-demo-new"
+nic_name                      = "nic-demo-new"
 ip_configuration_name         = "internal"
 private_ip_address_allocation = "Dynamic"
 
